@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <description>Flow to grab contact information and create a record for the same</description>
+    <environments>Default</environments>
+    <interviewLabel>Contact Information {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contact Information</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Create a contact record with the inputted information</description>
+        <name>Create_Contact</name>
+        <label>Create Contact</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <connector>
+            <targetReference>Success_Screen</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Error_Screen</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Email</field>
+            <value>
+                <elementReference>Email.value</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FirstName</field>
+            <value>
+                <elementReference>Contact_Name.firstName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>LastName</field>
+            <value>
+                <elementReference>Contact_Name.lastName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Title</field>
+            <value>
+                <elementReference>Title</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <screens>
+        <description>Screen to grab contact information</description>
+        <name>Contact_Information</name>
+        <label>Contact Information</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Create_Contact</targetReference>
+        </connector>
+        <fields>
+            <name>Contact_Name</name>
+            <extensionName>flowruntime:name</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>disabled</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldsToDisplayList</name>
+                <value>
+                    <stringValue>firstName,lastName</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Contact Name</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>Title</name>
+            <dataType>String</dataType>
+            <fieldText>Title</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Email</name>
+            <extensionName>flowruntime:email</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Title</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <nextOrFinishButtonLabel>Save</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>This screen displays the error message in case something goes wrong</description>
+        <name>Error_Screen</name>
+        <label>Error Screen</label>
+        <locationX>440</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Error_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px; color: rgb(237, 20, 20);&quot;&gt;{!$Flow.FaultMessage}&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>This screens displays the success message in case everything goes smooth</description>
+        <name>Success_Screen</name>
+        <label>Success Screen</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Success_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px; color: rgb(14, 182, 25);&quot;&gt;Your information has been saved successfully!&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Contact_Information</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>

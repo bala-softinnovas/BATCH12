@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>56.0</apiVersion>
+    <dynamicChoiceSets>
+        <description>Variable which stores all loan type options</description>
+        <name>LoanTypeOptions</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Loan_Type__c</picklistField>
+        <picklistObject>Loan_Application__c</picklistObject>
+    </dynamicChoiceSets>
+    <environments>Default</environments>
+    <interviewLabel>New Loan Application {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>New Loan Application</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <name>Create_Loan_Record</name>
+        <label>Create Loan Record</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <connector>
+            <targetReference>Success_Screen</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Error_Screen</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Car_Cost__c</field>
+            <value>
+                <elementReference>Car_Cost</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Car_Type__c</field>
+            <value>
+                <elementReference>Car_Type</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Car_Vendor__c</field>
+            <value>
+                <elementReference>Car_Vendor</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Home_Cost__c</field>
+            <value>
+                <elementReference>Home_Cost</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Home_Location__c</field>
+            <value>
+                <elementReference>Home_Location</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Home_Type__c</field>
+            <value>
+                <elementReference>Home_Type</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Loan_Type__c</field>
+            <value>
+                <elementReference>Loan_Type</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Personal_Amount__c</field>
+            <value>
+                <elementReference>Personal_Amount</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Personal_Need__c</field>
+            <value>
+                <elementReference>Personal_Need</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Loan_Application__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <screens>
+        <description>Screen to display errors</description>
+        <name>Error_Screen</name>
+        <label>Error Screen</label>
+        <locationX>440</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Error_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px; color: rgb(208, 24, 24);&quot;&gt;{!$Flow.FaultMessage}&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>screen to grab loan information</description>
+        <name>Loan_Application</name>
+        <label>Loan Application</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Create_Loan_Record</targetReference>
+        </connector>
+        <fields>
+            <name>Loan_Type</name>
+            <choiceReferences>LoanTypeOptions</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Loan Type</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Home_Type</name>
+            <dataType>String</dataType>
+            <fieldText>Home Type</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Loan_Type</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Home Loan</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Home_Location</name>
+            <dataType>String</dataType>
+            <fieldText>Home Location</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Loan_Type</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Home Loan</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Home_Cost</name>
+            <dataType>Currency</dataType>
+            <fieldText>Home Cost</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Loan_Type</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Home Loan</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Car_Type</name>
+            <dataType>String</dataType>
+            <fieldText>Car Type</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Loan_Type</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Car Loan</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Car_Vendor</name>
+            <dataType>String</dataType>
+            <fieldText>Car Vendor</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Loan_Type</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Car Loan</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Car_Cost</name>
+            <dataType>Currency</dataType>
+            <fieldText>Car Cost</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Loan_Type</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Car Loan</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Personal_Need</name>
+            <dataType>String</dataType>
+            <fieldText>Personal Need</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Loan_Type</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Personal Loan</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Personal_Amount</name>
+            <dataType>Currency</dataType>
+            <fieldText>Personal Amount</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Loan_Type</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Personal Loan</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <nextOrFinishButtonLabel>Save</nextOrFinishButtonLabel>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Screen to display success message</description>
+        <name>Success_Screen</name>
+        <label>Success Screen</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Success_Message</name>
+            <fieldText>&lt;p&gt;&lt;strong style=&quot;font-size: 14px; color: rgb(24, 189, 37);&quot;&gt;A loan application has been created successfully!&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Loan_Application</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Grab the current account id</description>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
