@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Track Property">
+        <div class="slds-var-m-around_medium">
+            <lightning-input
+                type="text"
+                label="Enter the city where you live in"
+                value={location.city}
+                onchange={changeHandler}>
+            </lightning-input>
+            <div>
+                I live in {location.city}, {location.country}!
+            </div>
+        </div>
+    </lightning-card>
+</template>

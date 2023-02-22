@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Two Way Data Binding">
+        <div class="slds-var-m-around_medium">
+            <lightning-input
+                type="text"
+                label="Enter your role"
+                value={title}
+                onkeyup={changeHandler}>
+            </lightning-input>
+            <div>{fullname} is a {title}</div>
+        </div>
+    </lightning-card>
+</template>

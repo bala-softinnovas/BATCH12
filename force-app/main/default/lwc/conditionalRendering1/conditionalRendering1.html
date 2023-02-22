@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Conditional Rendering">
+        <div class="slds-var-m-around_medium">
+            <template if:true={createdViaEmail}>
+                This case was created via an email!
+            </template>
+            <template if:false={createdViaEmail}>
+                This case was created via a phone call!
+            </template>
+        </div>
+    </lightning-card>
+</template>
