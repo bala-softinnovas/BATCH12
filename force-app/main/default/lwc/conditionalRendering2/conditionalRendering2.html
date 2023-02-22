@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Conditional Rendering">
+        <div class="slds-var-m-around_medium">
+            <lightning-button
+                label="Show/Hide"
+                variant="brand"
+                onclick={clickHandler}>
+            </lightning-button>
+            <template if:true={showContent}>
+                <div class="slds-var-m-top_small">
+                    I am from Batch#12. <br/>
+                    I have a long way to complete this bootcamp. I am gonna succeed soon! <br/>
+                    I am the 1 month away from market.
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

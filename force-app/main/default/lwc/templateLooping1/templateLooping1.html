@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="Template Looping : Fruits">
+        <div class="slds-var-m-around_medium">
+            <template for:each={fruits} for:item="fruit">
+                <div key={fruit}>{fruit}</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
