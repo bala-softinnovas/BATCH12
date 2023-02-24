@@ -8,6 +8,7 @@ import REVENUE_FIELD from '@salesforce/schema/Account.AnnualRevenue';
 import PHONE_FIELD from '@salesforce/schema/Account.Phone';
 
 export default class LightningRecordFormAccount extends LightningElement {
+    recordId = "0012w00001FfBhWAAV";
     objectName = ACCOUNT_OBJECT;
     fields = [NAME_FIELD, TYPE_FIELD, INDUSTRY_FIELD, REVENUE_FIELD, PHONE_FIELD];
 }
