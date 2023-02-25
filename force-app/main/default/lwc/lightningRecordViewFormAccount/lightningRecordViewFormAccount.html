@@ -6,11 +6,17 @@
                 record-id={recordId}>
 
                 <!--output fields-->
-                <lightning-output-field field-name="Name"></lightning-output-field>
-                <lightning-output-field field-name="Type"></lightning-output-field>
-                <lightning-output-field field-name="Industry"></lightning-output-field>
-                <lightning-output-field field-name="AnnualRevenue"></lightning-output-field>
-                <lightning-output-field field-name="Phone"></lightning-output-field>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-output-field field-name={fields.name}></lightning-output-field>
+                        <lightning-output-field field-name={fields.type}></lightning-output-field>
+                        <lightning-output-field field-name={fields.industry}></lightning-output-field>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-output-field field-name={fields.revenue}></lightning-output-field>
+                        <lightning-output-field field-name={fields.phone}></lightning-output-field>
+                    </div>
+                </div>
             </lightning-record-view-form>
         </div>
     </lightning-card>
