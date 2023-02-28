@@ -1,31 +1,30 @@
 <template>
-    <lightning-card title="Lightning Record Edit Form - Opp" icon-name="standard:opportunity">
+    <lightning-card title="Lightning Record Edit Form - Employee" icon-name="standard:contact">
         <div class="slds-var-m-around_medium">
             <lightning-record-edit-form
                 object-api-name={objectName}
-                record-id={recordId}
                 onsuccess={successHandler}>
 
                 <!-- input fields -->
                 <lightning-messages></lightning-messages>
                 <div class="slds-grid slds-gutters">
                     <div class="slds-col">
-                        <lightning-input-field field-name={fields.account}></lightning-input-field>
-                        <lightning-input-field field-name={fields.type}></lightning-input-field>
-                        <lightning-input-field field-name={fields.amount}></lightning-input-field>
+                        <lightning-input-field field-name={fields.employeeName}></lightning-input-field>
+                        <lightning-input-field field-name={fields.designation}></lightning-input-field>
+                        <lightning-input-field field-name={fields.email}></lightning-input-field>
                     </div>
                     <div class="slds-col">
-                        <lightning-input-field field-name={fields.name}></lightning-input-field>
-                        <lightning-input-field field-name={fields.stage}></lightning-input-field>
-                        <lightning-input-field field-name={fields.closeDate}></lightning-input-field>
+                        <lightning-input-field field-name={fields.username}></lightning-input-field>
+                        <lightning-input-field field-name={fields.phone}></lightning-input-field>
+                        <lightning-input-field field-name={fields.gender}></lightning-input-field>
                     </div>
                 </div>
-                <div class="slds-align_absolute-center slds-var-m-top_medium slds-var-m-bottom_large">
+                <div class="slds-align_absolute-center slds-var-m-top_large slds-var-m-bottom_x-large">
                     <lightning-button
                         label="Cancel"
                         variant="neutral"
-                        class="slds-var-m-right_x-small"
-                        type="reset">
+                        type="reset"
+                        class="slds-var-m-right_x-small">
                     </lightning-button>
                     <lightning-button
                         label="Save"
