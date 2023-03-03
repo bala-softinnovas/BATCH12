@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Get Picklist Values By Record Type - Account" icon-name="standard:account">
+        <div class="slds-var-m-around_medium">
+            <lightning-combobox
+                label="Select the type"
+                name="Type"
+                onchange={changeHandler}
+                options={typeOptions}>
+            </lightning-combobox>
+            <lightning-combobox
+                label="Select the industry"
+                name="Industry"
+                onchange={changeHandler}
+                options={industryOptions}>
+            </lightning-combobox>
+            <div class="slds-var-m-top_small green-background ">
+                <template if:true={selectedType}>
+                    Selected Type is: {selectedType} <br/>
+                </template>
+                <template if:true={selectedIndustry}>
+                    Selected Industry is: {selectedIndustry}
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>
