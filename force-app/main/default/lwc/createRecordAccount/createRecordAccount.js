@@ -55,6 +55,8 @@ export default class CreateRecordAccount extends LightningElement {
     }
 
     cancelAccount() {
-
+        this.template.querySelector('form.accountform').reset();
+        this.template.querySelector('lightning-combobox').value = undefined;
+        this.formdata = {};
     }
 }

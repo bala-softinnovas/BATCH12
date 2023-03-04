@@ -1,26 +1,26 @@
 <template>
-    <lightning-card title="Create Record - Account" icon-name="standard:account">
+    <lightning-card title="Create Record - Employee" icon-name="standard:contact">
         <div class="slds-var-m-around_medium">
-            <form class="accountform">
-                <!-- Account Name -->
+            <form class="empform">
+                <!-- Employee Name -->
                 <lightning-input
                     type="text"
-                    label="Account Name"
-                    name="Name"
+                    label="Employee Name"
+                    name="Employee_Name__c"
                     onchange={changeHandler}>
                 </lightning-input>
-                <!-- Industry -->
-                <lightning-combobox
-                    label="Industry"
-                    name="Industry"
-                    options={industryOptions}
-                    onchange={changeHandler}>
-                </lightning-combobox>
-                <!-- Annual Revenue -->
+                <!-- Email -->
                 <lightning-input
-                    type="number"
-                    label="Annual Revenue"
-                    name="AnnualRevenue"
+                    type="email"
+                    label="Email"
+                    name="Email__c"
+                    onchange={changeHandler}>
+                </lightning-input>
+                <!-- Designation -->
+                <lightning-input
+                    type="text"
+                    label="Designation"
+                    name="Designation__c"
                     onchange={changeHandler}>
                 </lightning-input>
                 <!-- cancel & save buttons -->
@@ -29,12 +29,12 @@
                         label="Cancel"
                         variant="neutral"
                         class="slds-var-m-right_x-small"
-                        onclick={cancelAccount}>
+                        onclick={cancelEmployee}>
                     </lightning-button>
                     <lightning-button
                         label="Save"
                         variant="brand"
-                        onclick={saveAccount}>
+                        onclick={saveEmployee}>
                     </lightning-button>
                 </div>
             </form>
